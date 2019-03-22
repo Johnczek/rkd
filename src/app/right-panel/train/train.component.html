@@ -1,3 +1,111 @@
-<p>
-  train works!
-</p>
+<div class="row">
+  <div class="col-12 mb-2" *ngIf="train != undefined">
+    <h1 class="text-center">{{train.name}}</h1>
+  </div>
+  <div class="col-6">
+    <table class="table table-striped">
+      <tbody>
+      <tr>
+        <th scope="row">ID</th>
+        <td>{{train.id}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Interní ID</th>
+        <td>{{train.internalId}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-6">
+    <h4>Náhled</h4>
+    <img src="{{train.getPictureURL()}}" alt="" />
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-12">
+    <alert type="info" [dismissible]="true">
+          <div class="d-flex align-items-center">
+            <span class="kbd mr-4">
+              +
+            </span>
+            Tyto prvky zobrazují možné ovládání za pomocí klávesnice. Je například možné za pomocí šipek ovládat rychlost vlaku, zapínání světel a další.
+          </div>
+    </alert>
+  </div>
+</div>
+<div class="row mb-4">
+  <div class="col-12">
+    <h2 class="text-center">Ovládací panel</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+      <div class="row">
+        <div class="col-12 mb-2">
+          <h3>Rychlost vlaku</h3>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-1">
+          <span class="kbd" (click)="decreaseSpeed()">
+            <i class="fas fa-long-arrow-alt-left" title="Kliknutím nebo zmáčknutím této klávesy zpomalíte vlak"></i>
+          </span>
+        </div>
+        <div class="col-10 mt-1">
+          <div id="slider">
+          </div>
+        </div>
+        <div class="col-1">
+          <span class="kbd" (click)="increaseSpeed()">
+            <i class="fas fa-long-arrow-alt-right" title="Kliknutím nebo zmáčknutím této klávesy zrychlíte vlak"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="row pt-4">
+        <div class="col-12">
+          <div class="button-wrapper d-flex">
+            <button type="button" class="btn btn-danger btn-lg d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka okamžitě zastaví vlak" (click)="decreaseSpeed(true)">
+                <span class="kbd mr-3">
+                    <i class="fas fa-long-arrow-alt-down"></i>
+                </span>
+                Zastavit vlak
+            </button>
+            <button type="button" class="btn btn-success btn-lg d-flex align-items-center" title="Stisknutí tohoto tlačítka zrychlí vlak na maximální rychlost" (click)="increaseSpeed(true)">
+                <span class="kbd mr-3">
+                    <i class="fas fa-long-arrow-alt-up"></i>
+                </span>
+                Maximální rychlost
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="col-12 pt-4 mt-4">
+      <div class="row">
+          <div class="col-12">
+              <h3>Světelná a výstražná znamení</h3>
+          </div>
+      </div>
+      <div class="row pt-4">
+        <div class="col-12">
+          <div class="button-wrapper d-flex">
+            <button type="button" class="btn btn-primary btn-lg d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka spustíte zvukové výstražné znamení" (click)="horn()">
+                  <span class="kbd mr-3">
+                      H
+                  </span>
+              Zvukové výstražné znamení
+            </button>
+            <button type="button" class="btn btn-primary btn-lg d-flex align-items-center" title="Stisknutí tohoto tlačítka zapne světelné výstražné znamení" (click)="lights()">
+                  <span class="kbd mr-3">
+                      L
+                  </span>
+              Světelné výstražné znamení
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

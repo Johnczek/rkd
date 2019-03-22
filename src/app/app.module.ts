@@ -8,6 +8,7 @@ import { TrainComponent } from './right-panel/train/train.component';
 import { HomepageComponent } from './right-panel/homepage/homepage.component';
 import { NotFoundComponent } from './right-panel/not-found/not-found.component';
 import {AppRoutingModule} from './app-routing.module';
+import {AlertModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {AppRoutingModule} from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AlertModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

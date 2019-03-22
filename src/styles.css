@@ -7608,7 +7608,7 @@ body {
   max-height: 100vh;
   overflow: hidden; }
   .app-content #left-panel-wrapper {
-    flex: 0 0 35%;
+    flex: 0 0 30%;
     height: 100vh;
     background-color: #f8f9fa;
     border-right: 1px solid #e9ecef;
@@ -7616,7 +7616,6 @@ body {
     color: #007bff;
     text-align: center; }
     .app-content #left-panel-wrapper .left-menu-header {
-      margin-bottom: .5rem;
       padding-bottom: .5rem;
       border-bottom: 1px solid #007bff; }
       .app-content #left-panel-wrapper .left-menu-header a {
@@ -7627,17 +7626,23 @@ body {
       font-weight: bold; }
     .app-content #left-panel-wrapper #left-menu-list {
       position: relative;
-      height: 91%;
+      height: 100vh;
+      overflow-y: scroll;
       padding: 0; }
+      .app-content #left-panel-wrapper #left-menu-list::-webkit-scrollbar {
+        width: 4px; }
+      .app-content #left-panel-wrapper #left-menu-list::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px; }
+      .app-content #left-panel-wrapper #left-menu-list::-webkit-scrollbar-thumb {
+        background: #007bff;
+        border-radius: 10px; }
       .app-content #left-panel-wrapper #left-menu-list .left-menu-item {
         display: flex;
         justify-content: center;
         align-items: center;
-        border-bottom: 1px solid #e9ecef;
-        border-right: 2px solid transparent; }
-        .app-content #left-panel-wrapper #left-menu-list .left-menu-item:hover, .app-content #left-panel-wrapper #left-menu-list .left-menu-item.active {
-          border-right-color: #007bff;
-          cursor: pointer; }
+        border-bottom: 2px solid #ced4da;
+        border-left: 2px solid transparent; }
         .app-content #left-panel-wrapper #left-menu-list .left-menu-item a {
           display: flex;
           justify-content: flex-start;
@@ -7645,14 +7650,22 @@ body {
           color: #007bff;
           width: 100%;
           text-align: center;
-          font-size: 1.2rem;
-          padding: 1rem; }
-          .app-content #left-panel-wrapper #left-menu-list .left-menu-item a:hover {
+          font-size: 1.2rem; }
+          .app-content #left-panel-wrapper #left-menu-list .left-menu-item a .train-wrapper {
+            padding: 1rem; }
+            .app-content #left-panel-wrapper #left-menu-list .left-menu-item a .train-wrapper .train-name {
+              margin-top: .5rem; }
+            .app-content #left-panel-wrapper #left-menu-list .left-menu-item a .train-wrapper img {
+              max-height: 70px;
+              width: auto; }
+          .app-content #left-panel-wrapper #left-menu-list .left-menu-item a:hover, .app-content #left-panel-wrapper #left-menu-list .left-menu-item a.active {
+            background-color: #ced4da;
+            cursor: pointer;
             text-decoration: none; }
-          .app-content #left-panel-wrapper #left-menu-list .left-menu-item a i {
-            margin-right: .4rem; }
+        .app-content #left-panel-wrapper #left-menu-list .left-menu-item:last-child {
+          border-bottom: none; }
   .app-content #right-panel-wrapper {
-    flex: 0 0 65%;
+    flex: 0 0 70%;
     padding: 3rem;
     max-height: 100vh;
     overflow-y: hidden; }

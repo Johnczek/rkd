@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TrainService} from '../services/train.service';
 
 @Component({
   selector: 'app-left-panel',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      public trainService: TrainService
+  ) { }
 
   ngOnInit() {
   }

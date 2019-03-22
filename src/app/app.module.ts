@@ -1,16 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LeftPanelComponent } from './left-panel/left-panel.component';
 import { RightPanelComponent } from './right-panel/right-panel.component';
+import { TrainComponent } from './right-panel/train/train.component';
+import { HomepageComponent } from './right-panel/homepage/homepage.component';
+import { NotFoundComponent } from './right-panel/not-found/not-found.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LeftPanelComponent,
-    RightPanelComponent
+    RightPanelComponent,
+    TrainComponent,
+    HomepageComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -19,4 +25,4 @@ import { RightPanelComponent } from './right-panel/right-panel.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

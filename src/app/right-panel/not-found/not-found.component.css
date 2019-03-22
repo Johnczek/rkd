@@ -1,0 +1,13 @@
+#not-found {
+  margin-top: 10rem; }
+  #not-found .icon i {
+    font-size: 6rem; }
+  #not-found p, #not-found h1 {
+    text-align: center; }
+
+.not-found-icon {
+  margin-bottom: 1rem; }
+  .not-found-icon i {
+    font-size: 4rem; }
+
+/*# sourceMappingURL=not-found.component.css.map */

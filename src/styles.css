@@ -7608,7 +7608,7 @@ body {
   max-height: 100vh;
   overflow: hidden; }
   .app-content #left-panel-wrapper {
-    flex: 0 0 30%;
+    flex: 0 0 20%;
     height: 100vh;
     background-color: #f8f9fa;
     border-right: 1px solid #e9ecef;
@@ -7663,7 +7663,7 @@ body {
         .app-content #left-panel-wrapper #left-menu-list .left-menu-item:last-child {
           border-bottom: none; }
   .app-content #right-panel-wrapper {
-    flex: 0 0 70%;
+    flex: 0 0 80%;
     padding: 3rem;
     max-height: 100vh;
     overflow-y: hidden; }
@@ -7692,8 +7692,13 @@ body {
     cursor: pointer; }
   .kbd i {
     font-size: 1rem; }
+  .kbd.kbd-big i {
+    font-size: 1.5rem; }
 
 .noUi-horizontal .noUi-tooltip {
   bottom: -150%; }
+
+.functionCol:empty {
+  display: none; }
 
 /*# sourceMappingURL=styles.css.map */

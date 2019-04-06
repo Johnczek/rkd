@@ -5,9 +5,9 @@
     </h2>
   </div>
 
-  <ul id="left-menu-list">
-    <li class="left-menu-item" *ngFor="let train of trainService.getTrains()">
-      <a [routerLink]="['/train', train.id]" routerLinkActive="active">
+  <ul id="left-menu-list" *ngIf="trains.length > 0">
+    <li class="left-menu-item" *ngFor="let train of trains">
+      <a [routerLink]="['/train', train.adresa]" routerLinkActive="active">
         <div class="train-wrapper w-100">
           <div class="row">
             <div class="col-12 d-flex justify-content-center">
@@ -15,7 +15,7 @@
             </div>
             <div class="col-12">
                 <span class="train-name">
-                  {{train.name}}
+                  {{train.nazev}}
                 </span>
             </div>
           </div>

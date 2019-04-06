@@ -2,7 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {TrainService} from '../../services/train.service';
 import {TrainModel} from '../../../model/train.model';
 import {ActivatedRoute} from '@angular/router';
-import noUiSlider from "nouislider";
+import noUiSlider from 'nouislider';
 
 @Component({
   selector: 'app-train',
@@ -10,8 +10,29 @@ import noUiSlider from "nouislider";
   styleUrls: ['./train.component.scss']
 })
 export class TrainComponent implements OnInit {
+    public keyMap: {} = {
+        0: 'q',
+        1: 'w',
+        2: 'e',
+        3: 'r',
+        4: 't',
+        5: 'y',
+        6: 'u',
+        7: 'i',
+        8: 'o',
+        9: 'p',
+        10: 'a',
+        11: 's',
+        12: 'd',
+        13: 'f',
+        14: 'g',
+        15: 'h',
+        16: 'j',
+        17: 'k',
+        18: 'l'
+    };
 
-  static readonly MAX_SPEED = 100;
+  static readonly MAX_SPEED = 28;
 
   static readonly MIN_SPEED = 0;
 
@@ -33,18 +54,26 @@ export class TrainComponent implements OnInit {
 
           if(this.slider != null) {
             this.slider.noUiSlider.reset();
-            this.slider.noUiSlider.set(this.train.speed);
+            this.slider.noUiSlider.set(this.train.rychlostStupne);
           } else {
             this.slider = document.getElementById('slider');
-            console.log('jsem tady');
             noUiSlider.create(this.slider, {
-              start: this.train.speed,
+              start: this.train.rychlostStupne,
               keyboardSupport: false,
               connect: [true, false],
               tooltips: true,
               range: {
                 'min': TrainComponent.MIN_SPEED,
-                'max': TrainComponent.MAX_SPEED
+                'max': TrainComponent.MAX_SPEED,
+              },
+              step: 1,
+              format: {
+                to: function ( value ) {
+                  return Math.floor(value);
+                },
+                from: function ( value ) {
+                  return Math.floor(value);
+                }
               }
             });
           }
@@ -55,57 +84,50 @@ export class TrainComponent implements OnInit {
   handleKeyPress(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowRight':
-          this.increaseSpeed(false);
+          this.increaseSpeed(1);
           break;
       case 'ArrowLeft':
-          this.decreaseSpeed(false);
+          this.decreaseSpeed(1);
           break;
       case 'ArrowDown':
-          this.decreaseSpeed(true);
           break;
       case 'ArrowUp':
-          this.increaseSpeed(true);
           break;
       case 'h':
-          this.horn();
           break;
       case 'l':
-          this.lights();
           break;
+      default:
+          let value = this.getKeyByValue(event.key);
+            if (value !== 'undefined') {
+                this.toggleFunction(+value);
+            }
     }
   }
 
-  private increaseSpeed(topSpeed:boolean) {
-    let previousValue =  TrainComponent.MAX_SPEED-1;
+  public increaseSpeed(increaseValue:number) {
+      let previousValue =  parseInt(this.slider.noUiSlider.get());
 
-    if (!topSpeed) {
-      previousValue =  parseInt(this.slider.noUiSlider.get());
+      this.setSpeed(previousValue+increaseValue);
+  }
+
+  public decreaseSpeed(decreaseValue:number) {
+      let previousValue =  parseInt(this.slider.noUiSlider.get());
+
+      this.setSpeed(previousValue-decreaseValue);
+  }
+
+  public setSpeed(speed: number) {
+      this.slider.noUiSlider.set(speed);
+
+    //TODO api connect
+  }
+
+  public toggleFunction(index: number) {
+      this.train.toggleFunction(index);
+  }
+
+  public getKeyByValue(value) {
+        return Object.keys(this.keyMap).find(key => this.keyMap[key] === value);
     }
-
-    this.slider.noUiSlider.set(previousValue+1);
-
-    //TODO Dodělat napojení na api
-  }
-
-  private decreaseSpeed(instantStop:boolean) {
-    let previousValue:number = TrainComponent.MIN_SPEED-1;
-
-    if(!instantStop) {
-      previousValue =  parseInt(this.slider.noUiSlider.get());
-    }
-
-    this.slider.noUiSlider.set(previousValue-1);
-
-    //TODO Dodělat napojení na api
-  }
-
-  private horn() {
-    console.log('Horn');
-    //TODO Dodělat napojení na api
-  }
-
-  private lights() {
-    console.log('lights');
-    //TODO Dodělat napojení na api
-  }
 }

@@ -21,7 +21,7 @@ body {
     overflow: hidden;
 
     #left-panel-wrapper {
-        flex: 0 0 30%;
+        flex: 0 0 20%;
         height: 100vh;
         background-color: $gray-100;
         border-right: 1px solid $gray-200;
@@ -104,7 +104,7 @@ body {
     }
 
     #right-panel-wrapper {
-        flex: 0 0 70%;
+        flex: 0 0 80%;
         padding: 3rem;
         max-height: 100vh;
         overflow-y: hidden;
@@ -139,8 +139,19 @@ body {
     i {
         font-size: 1rem;
     }
+
+    &.kbd-big {
+        i {
+            font-size: 1.5rem;
+        }
+    }
 }
 
 .noUi-horizontal .noUi-tooltip {
     bottom: -150%;
+}
+
+
+.functionCol:empty {
+    display: none;
 }

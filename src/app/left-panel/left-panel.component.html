@@ -5,7 +5,7 @@
     </h2>
   </div>
 
-  <ul id="left-menu-list" *ngIf="trains.length > 0">
+  <ul id="left-menu-list" *ngIf="trains !== undefined && trains.length > 0">
     <li class="left-menu-item" *ngFor="let train of trains">
       <a [routerLink]="['/train', train.adresa]" routerLinkActive="active">
         <div class="train-wrapper w-100">

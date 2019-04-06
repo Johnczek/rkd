@@ -96,9 +96,13 @@
                 </button>
             </div>
         </div>
-          <div class="col-4 d-flex">
+          <div class="col-4 d-flex justify-content-end">
               <div class="button-wrapper d-flex">
-                  <button type="button" class="btn btn-success d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka okamžitě zastaví vlak" (click)="setSpeed(27)">
+                  <button type="button"
+                          class="btn btn-success d-flex align-items-center mr-4"
+                          title="Stisknutí tohoto tlačítka změní směr vlaku vpřed"
+                          (click)="setDirection(1)"
+                          [ngClass]="{'btn-success': train.smer === 1, 'btn-secondary': train.smer === 0}">
                     <span class="kbd kbd-big mr-3">
                           <i class="fas fa-long-arrow-alt-up" title="Kliknutím nebo zmáčknutím této klávesy změníte směr jízdy vlaku směrem vpřed"></i>
                     </span>
@@ -106,9 +110,13 @@
                   </button>
               </div>
               <div class="button-wrapper d-flex">
-                  <button type="button" class="btn btn-secondary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka okamžitě zastaví vlak" (click)="setSpeed(27)">
+                  <button type="button"
+                          class="btn btn-secondary d-flex align-items-center"
+                          title="Kliknutím nebo zmáčknutím této klávesy změníte směr jízdy vlaku směrem vzad"
+                          (click)="setDirection(0)"
+                          [ngClass]="{'btn-success': train.smer === 0, 'btn-secondary': train.smer === 1}">
                     <span class="kbd kbd-big mr-3">
-                          <i class="fas fa-long-arrow-alt-down" title="Kliknutím nebo zmáčknutím této klávesy změníte směr jízdy vlaku směrem vzad"></i>
+                          <i class="fas fa-long-arrow-alt-down"></i>
                     </span>
                       Směr vzad
                   </button>
@@ -117,7 +125,7 @@
       </div>
   </div>
 
-  <div class="col-12 pt-4">
+  <div class="col-12 pt-4" *ngIf="train !== undefined && train.vyznamFunkci != undefined">
       <div class="row">
           <div class="col-12">
               <h3>Funkce</h3>
@@ -126,10 +134,10 @@
       <div class="row pt-4">
           <div class="col-3 mb-2 functionCol" *ngFor="let funkce of train.vyznamFunkci; index as i">
                 <button *ngIf="funkce != ''"
-                        type="button" [ngClass]="{'btn-secondary': !train.isFunctionActive(i), 'btn-primary btn-active': train.isFunctionActive(i)}"
+                        type="button" [ngClass]="{'btn-secondary': !train.isFunctionActive(i), 'btn-success': train.isFunctionActive(i)}"
                         class="btn btn-sm btn-block d-flex align-items-center mr-4"
                         (click)="train.toggleFunction(i)">
-                      <span class="kbd mr-3">
+                      <span class="kbd mr-3" *ngIf="i < getKeymapLength()">
                           {{keyMap[i].toUpperCase()}}
                       </span>
                   {{funkce}}

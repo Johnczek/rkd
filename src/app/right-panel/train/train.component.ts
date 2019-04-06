@@ -29,7 +29,15 @@ export class TrainComponent implements OnInit {
         15: 'h',
         16: 'j',
         17: 'k',
-        18: 'l'
+        18: 'l',
+        19: 'a',
+        20: 'z',
+        21: 'x',
+        22: 'c',
+        23: 'v',
+        24: 'b',
+        25: 'n',
+        26: 'm'
     };
 
   static readonly MAX_SPEED = 28;
@@ -48,7 +56,7 @@ export class TrainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(map => {
+    this.activatedRoute.paramMap.subscribe(() => {
         this.trainId = this.activatedRoute.snapshot.params.id;
         this.train = this.trainService.getTrainById(this.trainId);
 
@@ -90,16 +98,26 @@ export class TrainComponent implements OnInit {
           this.decreaseSpeed(1);
           break;
       case 'ArrowDown':
+          this.setDirection(0);
           break;
       case 'ArrowUp':
+          this.setDirection(1);
           break;
-      case 'h':
+      case '0':
+          this.setSpeed(0);
           break;
-      case 'l':
+      case '1':
+          this.setSpeed(19);
+          break;
+      case '2':
+          this.setSpeed(23);
+          break;
+      case '3':
+          this.setSpeed(27);
           break;
       default:
           let value = this.getKeyByValue(event.key);
-            if (value !== 'undefined') {
+            if (value !== undefined) {
                 this.toggleFunction(+value);
             }
     }
@@ -119,15 +137,22 @@ export class TrainComponent implements OnInit {
 
   public setSpeed(speed: number) {
       this.slider.noUiSlider.set(speed);
+      this.trainService.setTrainSpeed(this.train, speed);
+  }
 
-    //TODO api connect
+  public setDirection(direction: number) {
+      this.trainService.setTrainDirection(this.train, direction);
   }
 
   public toggleFunction(index: number) {
-      this.train.toggleFunction(index);
+      this.trainService.toggleTrainFunction(this.train, index);
   }
 
-  public getKeyByValue(value) {
+  private getKeyByValue(value) {
         return Object.keys(this.keyMap).find(key => this.keyMap[key] === value);
-    }
+  }
+
+  public getKeymapLength() {
+      return Object.keys(this.keyMap).length;
+  }
 }

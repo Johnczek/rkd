@@ -21,10 +21,29 @@ export class TrainModel {
 
     constructor(values: {}) {
         Object.assign(this, values);
+        this.getPictureURL();
     }
 
     getPictureURL() {
-        return this.pictureURL == null ? 'assets/images/trains/default.png' : this.pictureURL;
+        const imageUrl = "http://lrkv.mendelu.cz/lokomotivy/obrazky/"+this.adresa+".jpg";
+        const defaultImageUrl = 'assets/images/trains/default.png';
+
+        if(this.pictureURL === undefined) {
+            this.imageExists(imageUrl, (exists) => {
+                this.pictureURL = exists ? imageUrl : defaultImageUrl;
+            })
+        }
+    }
+
+    private imageExists(imageUrl: string, callback) {
+        let img = new Image();
+        img.onload = () => {
+            callback(true);
+        };
+        img.onerror = () => {
+            callback(false);
+        };
+        img.src = imageUrl;
     }
 
     setDetailData(data:{rychlostStupne?:number, smer?:number, stavFunkci?:string, stanovisteA?:string}) {

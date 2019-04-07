@@ -16,7 +16,7 @@ export class TrainComponent implements OnInit {
         2: 'e',
         3: 'r',
         4: 't',
-        5: 'y',
+        5: 'z',
         6: 'u',
         7: 'i',
         8: 'o',
@@ -31,7 +31,7 @@ export class TrainComponent implements OnInit {
         17: 'k',
         18: 'l',
         19: 'a',
-        20: 'z',
+        20: 'y',
         21: 'x',
         22: 'c',
         23: 'v',
@@ -107,12 +107,15 @@ export class TrainComponent implements OnInit {
           this.setSpeed(0);
           break;
       case '1':
-          this.setSpeed(19);
+          this.setSpeed(15);
           break;
       case '2':
-          this.setSpeed(23);
+          this.setSpeed(19);
           break;
       case '3':
+          this.setSpeed(23);
+          break;
+      case '4':
           this.setSpeed(27);
           break;
       default:

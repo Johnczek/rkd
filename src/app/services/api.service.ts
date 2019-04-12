@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
-import {TrainModel} from '../../model/train.model';
+import {Injectable} from '@angular/core';
+import {TrainModel} from '../model/train.model';
+import {AlertService} from './alert.service';
+import {AlertType} from '../enums/alertType.enum';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -125,7 +128,7 @@ export class ApiService {
     }
   };
 
-  constructor() { }
+  constructor(public alertService: AlertService) { }
 
   getAllTrains() {
       //TODO
@@ -140,6 +143,33 @@ export class ApiService {
 
   getTrainDetailById(id: number) {
       //TODO
+      //this.alertService.alert(AlertType.Success, "Tesovací message");
       return this.trainDetail["lokStav"];
+  }
+
+  private handleResponseMessages(response:any) {
+    //TODO napojit na API
+    const messages: [{messageContent, messageType}] = response.messages;
+
+    if(messages != null && messages.length > 0) {
+      this.alertService.parseAlerts(messages);
+    }
+  }
+
+  private handleError (response: Response | any) {
+    //TODO napojit na API
+    if(response != null && response.error != null) {
+      const error = response.error;
+
+      if(error.messages != null && error.messages.length > 0) {
+        const errorMessages = error.messages;
+        this.alertService.parseAlerts(errorMessages);
+      }
+    }
+
+    //this.router.navigate(['../']);
+
+    return Observable.throw(response);
+
   }
 }

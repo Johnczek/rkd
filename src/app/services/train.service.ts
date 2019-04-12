@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {TrainModel} from '../../model/train.model';
+import {TrainModel} from '../model/train.model';
 import {ApiService} from './api.service';
 
 @Injectable({

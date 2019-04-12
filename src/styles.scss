@@ -155,3 +155,15 @@ body {
 .functionCol:empty {
     display: none;
 }
+
+.alert-container {
+    min-height: 0;
+    position: relative;
+    z-index: 100;
+}
+
+.mendelu-wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

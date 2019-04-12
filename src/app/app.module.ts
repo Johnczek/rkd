@@ -9,6 +9,8 @@ import { HomepageComponent } from './right-panel/homepage/homepage.component';
 import { NotFoundComponent } from './right-panel/not-found/not-found.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AlertModule} from 'ngx-bootstrap';
+import { AlertComponent } from './alert/alert.component';
+import {AlertService} from './services/alert.service';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,15 @@ import {AlertModule} from 'ngx-bootstrap';
     RightPanelComponent,
     TrainComponent,
     HomepageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AlertModule.forRoot()
   ],
-  providers: [],
+  providers: [AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

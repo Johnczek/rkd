@@ -141,12 +141,12 @@
       </div>
       <div class="row pt-4">
           <div class="col-3 mb-2 functionCol" *ngFor="let funkce of train.vyznamFunkci; index as i">
-                <button *ngIf="funkce != ''"
+                <button *ngIf="funkce !== ''"
                         type="button" [ngClass]="{'btn-secondary': !train.isFunctionActive(i), 'btn-success': train.isFunctionActive(i)}"
                         class="btn btn-sm btn-block d-flex align-items-center mr-4"
                         (click)="train.toggleFunction(i)">
-                      <span class="kbd mr-3" *ngIf="i < getKeymapLength()">
-                          {{keyMap[i].toUpperCase()}}
+                      <span class="kbd mr-3" *ngIf="i < getKeymapLength() && getFunctionKey(funkce, i) != undefined">
+                          {{getFunctionKey(funkce, i).toUpperCase()}}
                       </span>
                   {{funkce}}
                 </button>

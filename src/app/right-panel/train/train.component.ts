@@ -246,4 +246,10 @@ export class TrainComponent implements OnInit {
             return this.keyMap[index];
         }
     }
+
+    public isSpecialFunction(value: string) {
+        let result = this.getMultipleKeysByValue(this.staticKeyMap, value);
+        console.log(this.staticKeyMap[value]);
+        return this.staticKeyMap[value] !== undefined;
+    }
 }

@@ -62,7 +62,7 @@
       </div>
 
       <div class="row pt-4">
-        <div class="col-8 d-flex">
+        <div class="col-12 d-flex overflow-x-auto">
           <div class="button-wrapper d-flex">
             <button type="button" class="btn btn-danger d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka okamžitě zastaví vlak" (click)="setSpeed(0)">
                 <span class="kbd mr-3">
@@ -72,7 +72,7 @@
             </button>
           </div>
             <div class="button-wrapper d-flex">
-                <button type="button" class="btn btn-primary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka okamžitě zastaví vlak" (click)="setSpeed(15)">
+                <button type="button" class="btn btn-primary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka se nastaví rychlostní stupeň 15" (click)="setSpeed(15)">
                 <span class="kbd mr-3">
                     1
                 </span>
@@ -80,7 +80,7 @@
                 </button>
             </div>
             <div class="button-wrapper d-flex">
-                <button type="button" class="btn btn-primary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka okamžitě zastaví vlak" (click)="setSpeed(19)">
+                <button type="button" class="btn btn-primary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka se nastaví rychlostní stupeň 19" (click)="setSpeed(19)">
                 <span class="kbd mr-3">
                     2
                 </span>
@@ -88,7 +88,7 @@
                 </button>
             </div>
             <div class="button-wrapper d-flex">
-                <button type="button" class="btn btn-primary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka okamžitě zastaví vlak" (click)="setSpeed(23)">
+                <button type="button" class="btn btn-primary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka se nastaví rychlostní stupeň 23" (click)="setSpeed(23)">
                 <span class="kbd mr-3">
                     3
                 </span>
@@ -96,16 +96,14 @@
                 </button>
             </div>
             <div class="button-wrapper d-flex">
-                <button type="button" class="btn btn-primary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka okamžitě zastaví vlak" (click)="setSpeed(27)">
+                <button type="button" class="btn btn-primary d-flex align-items-center mr-4" title="Stisknutí tohoto tlačítka se nastaví rychlostní stupeň 27" (click)="setSpeed(27)">
                 <span class="kbd mr-3">
                     4
                 </span>
                     27
                 </button>
             </div>
-        </div>
-          <div class="col-4 d-flex justify-content-end">
-              <div class="button-wrapper d-flex">
+              <div class="button-wrapper d-flex ml-auto">
                   <button type="button"
                           class="btn btn-success d-flex align-items-center mr-4"
                           title="Stisknutí tohoto tlačítka změní směr vlaku vpřed"
@@ -139,8 +137,10 @@
               <h3>Funkce</h3>
           </div>
       </div>
-      <div class="row pt-4">
-          <div class="col-3 mb-2 functionCol" *ngFor="let funkce of train.vyznamFunkci; index as i">
+      <div class="row pt-4 function-row">
+          <div class="col-4 col-lg-3 mb-2 function-col"
+               *ngFor="let funkce of train.vyznamFunkci; index as i"
+               [ngClass]="{'special-function': isSpecialFunction(funkce)}">
                 <button *ngIf="funkce !== ''"
                         type="button" [ngClass]="{'btn-secondary': !train.isFunctionActive(i), 'btn-success': train.isFunctionActive(i)}"
                         class="btn btn-sm btn-block d-flex align-items-center mr-4"

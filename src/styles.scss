@@ -42,7 +42,7 @@ body {
 
         #left-menu-list {
             position: relative;
-            height: 100vh;
+            height: 88vh;
             overflow-y: scroll;
             padding: 0;
 
@@ -107,7 +107,7 @@ body {
         //flex: 0 0 80%;
         padding: 3rem;
         max-height: 100vh;
-        overflow-y: hidden;
+        overflow-y: auto;
     }
 }
 
@@ -151,9 +151,21 @@ body {
     bottom: -150%;
 }
 
+.function-row {
+    .function-col {
+        order: 0;
+        &.special-function {
+            order: -1;
+        }
 
-.functionCol:empty {
-    display: none;
+        &:empty {
+            display: none;
+        }
+    }
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
 }
 
 .alert-container {

@@ -7623,7 +7623,7 @@ body {
       font-weight: bold; }
     .app-content #left-panel-wrapper #left-menu-list {
       position: relative;
-      height: 100vh;
+      height: 88vh;
       overflow-y: scroll;
       padding: 0; }
       .app-content #left-panel-wrapper #left-menu-list::-webkit-scrollbar {
@@ -7664,7 +7664,7 @@ body {
   .app-content #right-panel-wrapper {
     padding: 3rem;
     max-height: 100vh;
-    overflow-y: hidden; }
+    overflow-y: auto; }
 
 .kbd {
   padding: .5rem 1rem;
@@ -7696,8 +7696,15 @@ body {
 .noUi-horizontal .noUi-tooltip {
   bottom: -150%; }
 
-.functionCol:empty {
-  display: none; }
+.function-row .function-col {
+  order: 0; }
+  .function-row .function-col.special-function {
+    order: -1; }
+  .function-row .function-col:empty {
+    display: none; }
+
+.overflow-x-auto {
+  overflow-x: auto; }
 
 .alert-container {
   min-height: 0;

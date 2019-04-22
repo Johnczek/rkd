@@ -30,14 +30,18 @@ export class TrainModel {
      * Metoda zjistí, zda-li k příslušné lokomotivě existuje na vzdáleném úložišti obrázek typu jpg. Pokud ne, zvolí defaultní obrázek.
      */
     getPictureURL() {
-        const imageUrl = globals.pictureBaseURL+this.adresa+".jpg";
-        const defaultImageUrl = globals.defaultPicturePath;
-
         if(this.pictureURL === undefined) {
+            const imageUrl = globals.pictureBaseURL+this.adresa+".jpg";
+            const defaultImageUrl = globals.defaultPicturePath;
+
             this.imageExists(imageUrl, (exists) => {
                 this.pictureURL = exists ? imageUrl : defaultImageUrl;
+
+                console.log(imageUrl);
+                //console.log(this.pictureURL);
             })
         }
+
     }
 
     /**

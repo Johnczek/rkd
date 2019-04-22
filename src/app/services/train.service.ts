@@ -16,6 +16,13 @@ export class TrainService {
   getTrains(): TrainModel[] {
     this.trains = this.apiService.getAllTrains();
 
+/*    this.apiService.getAllTrains().subscribe(
+        (loks) => {
+            this.trains = loks;
+        }
+    );*/
+
+
     return this.trains;
   }
 

@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-12 mb-2" *ngIf="train !== undefined">
+<div class="row" *ngIf="train !== undefined">
+  <div class="col-12 mb-2">
     <h1 class="text-center">{{train.nazev}}</h1>
   </div>
   <div class="col-6">
@@ -32,7 +32,7 @@
     </div>
 </div>
 <hr>
-<div class="row mb-2">
+<div class="row mb-2" *ngIf="train !== undefined">
   <div class="col-12">
     <h2 class="text-center m-0"><strong>Ovládací panel</strong></h2>
   </div>
@@ -103,7 +103,7 @@
                     27
                 </button>
             </div>
-              <div class="button-wrapper d-flex ml-auto">
+              <div class="button-wrapper d-flex ml-auto" *ngIf="train !== undefined">
                   <button type="button"
                           class="btn btn-success d-flex align-items-center mr-4"
                           title="Stisknutí tohoto tlačítka změní směr vlaku vpřed"
@@ -115,7 +115,7 @@
                       Směr vpřed
                   </button>
               </div>
-              <div class="button-wrapper d-flex">
+              <div class="button-wrapper d-flex" *ngIf="train !== undefined">
                   <button type="button"
                           class="btn btn-secondary d-flex align-items-center"
                           title="Kliknutím nebo zmáčknutím této klávesy změníte směr jízdy vlaku směrem vzad"
@@ -131,7 +131,7 @@
       </div>
   </div>
 
-  <div class="col-12 pt-4" *ngIf="train !== undefined && train.vyznamFunkci != undefined">
+  <div class="col-12 pt-4" *ngIf="train !== undefined && train.vyznamFunkci != undefined && train.stavFunkci">
       <div class="row">
           <div class="col-12">
               <h3>Funkce</h3>
@@ -144,7 +144,7 @@
                 <button *ngIf="funkce !== ''"
                         type="button" [ngClass]="{'btn-secondary': !train.isFunctionActive(i), 'btn-success': train.isFunctionActive(i)}"
                         class="btn btn-sm btn-block d-flex align-items-center mr-4"
-                        (click)="train.toggleFunction(i)">
+                        (click)="train.toggleFunction(i); this.trainService.sendFunctionStatus(this.train); this.reloadPage()">
                       <span class="kbd mr-3" *ngIf="i < getKeymapLength() && getFunctionKey(funkce, i) != undefined">
                           {{getFunctionKey(funkce, i).toUpperCase()}}
                       </span>
@@ -153,4 +153,12 @@
         </div>
       </div>
   </div>
+    <div *ngIf="train === undefined" class="w-100 mt-5">
+        <div class="d-flex justify-content-center flex-wrap">
+            <div class="spinner-border d-block" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="w-100 text-center mt-2">Načítám data... vyčkejte prosím</div>
+        </div>
+    </div>
 </div>

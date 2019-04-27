@@ -11,6 +11,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {AlertModule} from 'ngx-bootstrap';
 import { AlertComponent } from './alert/alert.component';
 import {AlertService} from './services/alert.service';
+import {HttpClientModule} from '@angular/common/http';
+import {TrainService} from './services/train.service';
+import {ApiService} from './services/api.service';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,10 @@ import {AlertService} from './services/alert.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     AlertModule.forRoot()
   ],
-  providers: [AlertService],
+  providers: [AlertService, TrainService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

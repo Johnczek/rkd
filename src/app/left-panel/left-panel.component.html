@@ -3,11 +3,10 @@
     <h2>
       <a routerLink="/">Strojvůdce</a>
     </h2>
-    <a (click)="alertTest()" style="cursor: pointer">Klikněte zde pro test alertu</a>
   </div>
 
-  <ul id="left-menu-list" *ngIf="trains !== undefined && trains.length > 0">
-    <li class="left-menu-item" *ngFor="let train of trains">
+  <ul id="left-menu-list" *ngIf="trainService.trains !== undefined && trainService.trains.length > 0">
+    <li class="left-menu-item" *ngFor="let train of trainService.trains">
       <a [routerLink]="['/train', train.adresa]" routerLinkActive="active">
         <div class="train-wrapper w-100">
           <div class="row">

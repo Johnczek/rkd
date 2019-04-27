@@ -4,9 +4,8 @@ import {AlertService} from './alert.service';
 import {AlertType} from '../enums/alertType.enum';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import { map } from 'rxjs/operators';
-
-import * as globals from '../../globals';
+import {environment} from '../../environments/environment.prod';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -456,33 +455,24 @@ export class ApiService {
   constructor(private alertService: AlertService,
               private http: HttpClient) { }
 
-  getAllTrains()/*: Observable<any>*/ {
-      //TODO
-
-/*
-      return this.http
-          .get(globals.api + '/loks')
-          .pipe(map((response: {loks?}) => {
-              this.handleResponseMessages(response);
-              const loks = response.loks;
-
-              return loks.map((lok) => new TrainModel(lok));
-          }));
-*/
-
-      let result: TrainModel[] = [];
-
-      for (let train of this.trains.loks) {
-        result.push(new TrainModel(train));
-      }
-
-      return result;
+  getAllTrains() {
+      return this.http.get(environment.api+environment.apiAllTrains);
   }
 
   getTrainDetailById(id: number) {
-      //TODO
-      //this.alertService.alert(AlertType.Success, "Tesovací message");
-      return this.trainDetail["lokStav"];
+      return this.http.get(environment.api+environment.apiDetailDetail+id);
+  }
+
+
+  updateTrain(id: number, train: TrainModel) {
+    const data = JSON.stringify(train);
+    console.log(data);
+
+    this.http.post(environment.api+environment.apiChangeTrain+id, data).subscribe((data: {lokStav?, chyba?}) => {
+        if (data.chyba !== undefined) {
+          this.alertService.error(data.chyba);
+        }
+    })
   }
 
   private handleResponseMessages(response:any) {

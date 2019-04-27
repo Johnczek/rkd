@@ -1,4 +1,4 @@
-import * as globals from '../../globals';
+import {environment} from '../../environments/environment.prod';
 
 export class TrainModel {
     public adresa: number;
@@ -21,7 +21,7 @@ export class TrainModel {
 
     public stanovisteA: string;
 
-    constructor(values: {}) {
+    constructor(values?: {}) {
         Object.assign(this, values);
         this.getPictureURL();
     }
@@ -31,14 +31,11 @@ export class TrainModel {
      */
     getPictureURL() {
         if(this.pictureURL === undefined) {
-            const imageUrl = globals.pictureBaseURL+this.adresa+".jpg";
-            const defaultImageUrl = globals.defaultPicturePath;
+            const imageUrl = environment.pictureBaseURL+this.adresa+".jpg";
+            const defaultImageUrl = environment.defaultPicturePath;
 
             this.imageExists(imageUrl, (exists) => {
                 this.pictureURL = exists ? imageUrl : defaultImageUrl;
-
-                console.log(imageUrl);
-                //console.log(this.pictureURL);
             })
         }
 

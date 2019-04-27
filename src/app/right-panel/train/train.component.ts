@@ -3,6 +3,7 @@ import {TrainService} from '../../services/train.service';
 import {TrainModel} from '../../model/train.model';
 import {ActivatedRoute} from '@angular/router';
 import noUiSlider from 'nouislider';
+import {ApiService} from '../../services/api.service';
 
 @Component({
     selector: 'app-train',
@@ -68,8 +69,10 @@ export class TrainComponent implements OnInit {
 
     constructor(
         private trainService: TrainService,
-        private activatedRoute: ActivatedRoute
-    ) { }
+        private activatedRoute: ActivatedRoute,
+        private apiService: ApiService
+    ) {
+    }
 
     /**
      * Metoda po načtení komponenty
@@ -78,35 +81,47 @@ export class TrainComponent implements OnInit {
         // Zkontrolujeme změnu URL adresy (pro načtení nových dat a správné zobrazení nového vlaku
         this.activatedRoute.paramMap.subscribe(() => {
             this.trainId = this.activatedRoute.snapshot.params.id;
-            this.train = this.trainService.getTrainById(this.trainId);
 
-            // Pokud již byl slider rychlosti v daném kontextu vytvořen, pouze ho zresetujeme a načteme nové hodnoty. Pokud ne, vytvoříme ho.
-            if(this.slider != null) {
-                this.slider.noUiSlider.reset();
-                this.slider.noUiSlider.set(this.train.rychlostStupne);
-            } else {
-                this.slider = document.getElementById('slider');
-                noUiSlider.create(this.slider, {
-                    start: this.train.rychlostStupne,
-                    keyboardSupport: false,
-                    connect: [true, false],
-                    tooltips: true,
-                    range: {
-                        'min': TrainComponent.MIN_SPEED,
-                        'max': TrainComponent.MAX_SPEED,
-                    },
-                    step: 1,
-                    format: {
-                        to: function ( value ) {
-                            return Math.floor(value);
-                        },
-                        from: function ( value ) {
-                            return Math.floor(value);
-                        }
-                    }
-                });
-            }
+            this.reloadPage()
         });
+    }
+
+    private reloadPage() {
+        this.train = this.trainService.getTrainById(this.trainId);
+
+
+        if (this.train !== undefined) {
+            this.apiService.getTrainDetailById(this.trainId).subscribe((data: {lokStav?}) => {
+                this.train.setDetailData(data.lokStav);
+
+                // Pokud již byl slider rychlosti v daném kontextu vytvořen, pouze ho zresetujeme a načteme nové hodnoty. Pokud ne, vytvoříme ho.
+                if(this.slider != null) {
+                    this.slider.noUiSlider.reset();
+                    this.slider.noUiSlider.set(this.train.rychlostStupne);
+                } else {
+                    this.slider = document.getElementById('slider');
+                    noUiSlider.create(this.slider, {
+                        start: this.train.rychlostStupne,
+                        keyboardSupport: false,
+                        connect: [true, false],
+                        tooltips: true,
+                        range: {
+                            'min': TrainComponent.MIN_SPEED,
+                            'max': TrainComponent.MAX_SPEED,
+                        },
+                        step: 1,
+                        format: {
+                            to: function ( value ) {
+                                return Math.floor(value);
+                            },
+                            from: function ( value ) {
+                                return Math.floor(value);
+                            }
+                        }
+                    });
+                }
+            });
+        }
     }
 
     /**
@@ -156,7 +171,11 @@ export class TrainComponent implements OnInit {
                         this.toggleFunction(+value);
                     }
                 }
+
+                this.trainService.sendFunctionStatus(this.train);
         }
+
+        this.reloadPage();
     }
 
     /**
@@ -186,6 +205,8 @@ export class TrainComponent implements OnInit {
     public setSpeed(speed: number) {
         this.slider.noUiSlider.set(speed);
         this.trainService.setTrainSpeed(this.train, speed);
+
+        this.reloadPage();
     }
 
     /**
@@ -194,6 +215,8 @@ export class TrainComponent implements OnInit {
      */
     public setDirection(direction: number) {
         this.trainService.setTrainDirection(this.train, direction);
+
+        this.reloadPage();
     }
 
     /**
@@ -249,7 +272,6 @@ export class TrainComponent implements OnInit {
 
     public isSpecialFunction(value: string) {
         let result = this.getMultipleKeysByValue(this.staticKeyMap, value);
-        console.log(this.staticKeyMap[value]);
         return this.staticKeyMap[value] !== undefined;
     }
 }

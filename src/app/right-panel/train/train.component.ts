@@ -93,7 +93,7 @@ export class TrainComponent implements OnInit {
         if (this.train !== undefined) {
             this.apiService.getTrainDetailById(this.trainId).subscribe((data: {lokStav?}) => {
                 this.train.setDetailData(data.lokStav);
-
+                console.log(data);
                 // Pokud již byl slider rychlosti v daném kontextu vytvořen, pouze ho zresetujeme a načteme nové hodnoty. Pokud ne, vytvoříme ho.
                 if(this.slider != null) {
                     this.slider.noUiSlider.reset();
@@ -174,8 +174,6 @@ export class TrainComponent implements OnInit {
 
                 this.trainService.sendFunctionStatus(this.train);
         }
-
-        this.reloadPage();
     }
 
     /**
@@ -203,10 +201,10 @@ export class TrainComponent implements OnInit {
      * @param speed rychlostní stupeň
      */
     public setSpeed(speed: number) {
-        this.slider.noUiSlider.set(speed);
         this.trainService.setTrainSpeed(this.train, speed);
 
-        this.reloadPage();
+        this.slider.noUiSlider.set(speed);
+        console.log("setuji "+speed);
     }
 
     /**
@@ -215,8 +213,6 @@ export class TrainComponent implements OnInit {
      */
     public setDirection(direction: number) {
         this.trainService.setTrainDirection(this.train, direction);
-
-        this.reloadPage();
     }
 
     /**

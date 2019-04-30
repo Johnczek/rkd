@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
 
-  api: "http://localhost:80/rkd-api/www",
+  api: "http://10.30.137.11:5823",
 
   apiAllTrains: "/loks",
 
   apiDetailDetail: "/lokStav/",
 
-  apiChangeTrain: "/lokStavU/",
+  apiChangeTrain: "/lokStav/",
 
   // Cesta k obrázkům (všechny obrázky musí být ve formátu jpg)
   pictureBaseURL: "http://lrkv.pef.mendelu.cz/wcd/w-pef-lrkv/clanky/",

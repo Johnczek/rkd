@@ -29,3 +29,7 @@
 - - train.service.ts - služba, která u sebe drží objekty všech vlaků a celá aplikace s nimi pracuje. Provádí valnou většinu business logiky nad nimi
 - - train.model.ts - modele vlaku, v případě rozšiřování stačí přidat instanční proměnnou a Object.assign se postará o správné namapování. Bude-li tato položka měnitelná, bude třeba doplnit i další logiku ve výše zmíněných třídách
 
+# Změny stylů
+- Aplikace využívá sass preprocesor. Je třeba ho zprovoznit (https://sass-lang.com/install) a po změně stylů (soubor .scss) je třeba spustit kompilaci (Napříkald zadáním příkazu "sass ." v root složce projektu. Nový vzhled se zkompiluje a bude viditelný v aplikaci)
+- Lze ovšem pro snadné změny využít Bootstrapu, css frameworku, který obsahuje valnou většinu věcí potřebných pro lehké zásahy do vzhledu (https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+

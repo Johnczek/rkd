@@ -126,7 +126,7 @@ export class TrainComponent implements OnInit {
 
     /**
      * Metoda sleduje stisknutí kláves a spouští různé akce
-    */
+     */
     @HostListener('document:keydown', ['$event'])
     handleKeyPress(event: KeyboardEvent) {
         switch (event.key) {

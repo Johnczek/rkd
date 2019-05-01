@@ -16,3 +16,16 @@
 5. Pokud aplikace na daném endpointu nefunguje, změňte v souboru index.html "<base href="/">" na "<base href="./">
 6. Aplikace by měla být plně funkční
 
+
+## Informace o aplikaci
+- Jedná se o single page aplikaci napsanou v Angularu
+- Chyby v aplikaci se vypisují do javascriptové konzole (F12 ve většině prohlížečů, záložka console). I to může pomoci při troubleshootingu.
+- Pokud změníte některou část kódu, je třeba (uvažujeme-li běh na serveru v komprimované verzi) znovu zbuildit projekt
+- Dokud nebude Cors privacy nastavené na API, je třeba využívat addon (https://addons.mozilla.org/cs/firefox/addon/cors-everywhere/) (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?utm_source=chrome-app-launcher-info-dialog ) jinak nebude napojení na api funkční.
+- Důležité soubory
+- - enviroment.prod.ts - statické informace (Například o napojení na API, cesty k defaultnímu obrázku atp.)
+- - train.component.ts - komponenta detailu vlaku. Naleznete zde mapování kláves. Jak statických tak dynamických. Jejich změna je dokumentána nad danými proměnnými. 
+- - api.service.ts - služba starající se o dotazy na API
+- - train.service.ts - služba, která u sebe drží objekty všech vlaků a celá aplikace s nimi pracuje. Provádí valnou většinu business logiky nad nimi
+- - train.model.ts - modele vlaku, v případě rozšiřování stačí přidat instanční proměnnou a Object.assign se postará o správné namapování. Bude-li tato položka měnitelná, bude třeba doplnit i další logiku ve výše zmíněných třídách
+
